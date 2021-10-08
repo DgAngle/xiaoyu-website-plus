@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 查询条件 */
+.com-form-query {
+    margin: 10px 0;
+}
+
+.com-form-query .el-input {
+    width: 20%;
+}
+
+.com-form-query .el-button {
+    margin-left: 10px;
+}
+
+/* 表格样式 */
+.el-table .warning-row {
+    background: rgba(246, 225, 99, 0.5);
+    /*color: #ffffff;*/
+}
+
+.el-table .success-row {
+    background: rgba(113, 252, 252, 0.5);
+    /*color: #ffffff;*/
+}
