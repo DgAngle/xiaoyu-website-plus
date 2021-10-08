@@ -1,0 +1,16 @@
+server:
+  port: 8089
+#  servlet:
+#    context-path: /xiaoyu_website
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xiaoyu_website?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    #    url: jdbc:mysql://47.93.240.238:3306/xiaoyu_website?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+
+mybatis-plus:
+  configuration:
+    # 关闭驼峰命名规则配置（默认为 true: SQL拼接时, 会将实体中的大写字母转成小写并加下划线）
+    map-underscore-to-camel-case: false
