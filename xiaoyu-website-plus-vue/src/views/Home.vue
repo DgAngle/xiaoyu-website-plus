@@ -2,7 +2,7 @@
   <div style="padding: 10px">
 
     <div style="margin: 10px 0;">
-      <el-button type="primary" icon="el-icon-plus" @click="userAdd">添加</el-button>
+      <el-button type="primary" icon="el-icon-plus" @click="openAddUser">添加</el-button>
     </div>
 
     <div class="form-query">
@@ -37,14 +37,27 @@
 
     <!-- 设置表头样式 -> :header-cell-style="{background:'#0e0e0e', color: '#fff'}"  -->
     <!-- 设置表行样式 -> :row-class-name="tableRowClassName"  -->
+    <!-- scope -> scope.$index, scope.row -->
     <el-table :data="tableData" border stripe style="width: 100%">
       <el-table-column prop="date" label="日期" width="180" sortable></el-table-column>
       <el-table-column prop="name" label="姓名" width="180"></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
       <el-table-column label="操作">
         <template #default="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <el-button size="mini" @click="openUserEdit(scope.row)">编辑</el-button>
+
+          <el-popconfirm
+              confirmButtonText="确定"
+              cancelButtonText="取消"
+              icon="el-icon-info"
+              iconColor="red"
+              title="确认删除该用户吗？"
+              @confirm="userDel(scope.row)"
+              @cancel="">
+            <template #reference>
+              <el-button size="mini" type="danger">删除</el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -81,7 +94,7 @@
       <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确认</el-button
+        <el-button type="primary" @click="addUser()">确认</el-button
         >
       </span>
       </template>
@@ -93,6 +106,7 @@
 
 <script>
 // @ is an alias to /src
+import request from "@/utils/request";
 
 export default {
   name: 'Home',
@@ -123,23 +137,32 @@ export default {
           {required: true, message: '请输入用户密码', trigger: 'blur',},
           {min: 3, max: 20, message: '用户名最低3位, 最高20位', trigger: 'blur',},
         ],
-      }
+      },
+      userList: [],
     }
   },
   methods: {
+
     showPassword() {
       this.passwordType = this.passwordType == 'password' ? 'text' : 'password';
     },
-    userAdd() {
+    openAddUser() {
       this.dialogFormVisible = true;
       this.userForm = {
         sex: 1,
         roleId: 3,
       };
     },
-    handleEdit(index, row) {
+    addUser() {
+      request.post("user/");
     },
-    handleDelete(index, row) {
+    openUserEdit(row) {
+      console.log(row)
+    },
+    userEdit() {
+    },
+    userDel(row) {
+      console.log(row)
     },
     handleSizeChange() {
     },
